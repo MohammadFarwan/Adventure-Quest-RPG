@@ -6,42 +6,16 @@ namespace AdventureQuestRPG
     {
         static void Main(string[] args)
         {
-            Player player = new Player("Hero", 100, 20, 10);
-            Monster monster = new Goblin("Goblin", 50, 15, 5);
+            Console.WriteLine("Enter your name? ");
+            string name = Console.ReadLine();
+            Player player = new Player(name, 100, 20, 10);
+            Monster goblin = new Goblin("Goblin", 50, 15, 5);
+            Monster bossMonster = new BossMonster("Dragon", 200, 50, 20);
 
-            StartBattle(player, monster);
+            Adventure adventure = new Adventure(player);
+            adventure.Start();
 
-            Console.WriteLine("Adventure complete!");
-        }
-
-        static void StartBattle(Player player, Monster enemy)
-        {
-            BattleSystem battleSystem = new BattleSystem();
-
-            Console.WriteLine($"A wild {enemy.Name} appears!");
-
-            while (player.Health > 0 && enemy.Health > 0)
-            {
-                // Player's turn
-                Console.WriteLine($"It's {player.Name}'s turn.");
-                battleSystem.Attack(player, enemy);
-
-                if (enemy.Health <= 0)
-                {
-                    Console.WriteLine($"You defeated the {enemy.Name}!");
-                    break;
-                }
-
-                // Enemy's turn
-                Console.WriteLine($"It's {enemy.Name}'s turn.");
-                battleSystem.Attack(enemy, player);
-
-                if (player.Health <= 0)
-                {
-                    Console.WriteLine($"You were defeated by the {enemy.Name}...");
-                    break;
-                }
-            }
+            Console.WriteLine("\nAdventure complete!");
         }
     }
 }

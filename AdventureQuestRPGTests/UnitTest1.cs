@@ -70,5 +70,25 @@ namespace AdventureQuestRPGTests
                 }
             }
         }
+
+
+        
+
+
+        [Fact]
+        public void MoveToNewLocationTest()
+        {
+            Player player = new Player("Hero", 100, 20, 10);
+            Adventure adventure = new Adventure(player);
+
+            List<string> locations = new List<string> { "Forest", "Cave", "Town" };
+            adventure.SetLocations(locations);
+
+            string initialLocation = adventure.CurrentLocation;
+            adventure.MoveToLocation("Cave");
+
+            Assert.NotEqual(initialLocation, adventure.CurrentLocation);
+            Assert.Equal("Cave", adventure.CurrentLocation);
+        }
     }
 }
